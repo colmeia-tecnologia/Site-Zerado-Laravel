@@ -1,8 +1,14 @@
 <ul>
     {{--BANNERS--}}
     <li>
-        <a href='{{url('/banners')}}' alt='Banners' title='Banners'>
+        <a href='{{route('banners.index')}}' alt='Banners' title='Banners'>
             <i class="fa fa-picture-o" aria-hidden="true"></i> Banners
+        </a>
+    </li>
+    {{--SERVICES--}}
+    <li>
+        <a href='{{route('services.index')}}' alt='Serviços' title='Serviços'>
+            <i class="fa fa-wrench" aria-hidden="true"></i> Serviços
         </a>
     </li>
 

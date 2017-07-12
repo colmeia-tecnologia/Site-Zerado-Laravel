@@ -24,6 +24,7 @@ Route::group([
 {
     Route::get('/', 'PainelController@index');
     Route::resource('banners', 'BannerController');
+    Route::resource('services', 'ServiceController');
     
     Route::resource('post_categories', 'PostCategoryController');
     Route::resource('posts', 'PostController');

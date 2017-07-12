@@ -39,6 +39,10 @@ class RepositoryServiceProvider extends ServiceProvider
                 \App\Repositories\BannerRepository::class, 
                 \App\Repositories\BannerRepositoryEloquent::class
         );
+        $this->app->bind(
+                \App\Repositories\ServiceRepository::class, 
+                \App\Repositories\ServiceRepositoryEloquent::class
+        );
         //:end-bindings:
     }
 }
