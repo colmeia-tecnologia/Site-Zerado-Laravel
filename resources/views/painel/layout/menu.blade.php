@@ -17,6 +17,12 @@
             <i class="fa fa-wrench" aria-hidden="true"></i> Serviços
         </a>
     </li>
+    {{--Users--}}
+    <li>
+        <a href='{{route('users.index')}}' alt='Usuários' title='Usuários'>
+            <i class="fa fa-user" aria-hidden="true"></i> Usuários
+        </a>
+    </li>
 
     {{--BLOG--}}
     <li class='menuLabel'>

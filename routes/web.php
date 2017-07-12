@@ -26,6 +26,7 @@ Route::group([
     Route::resource('banners', 'BannerController');
     Route::resource('services', 'ServiceController');
     Route::resource('portfolios', 'PortfolioController');
+    Route::resource('users', 'UserController');
     
     Route::resource('post_categories', 'PostCategoryController');
     Route::resource('posts', 'PostController');
