@@ -5,6 +5,12 @@
             <i class="fa fa-picture-o" aria-hidden="true"></i> Banners
         </a>
     </li>
+    {{--PORTFOLIO--}}
+    <li>
+        <a href='{{url('/portfolios')}}' alt='Portifólios' title='Portifólios'>
+            <i class="fa fa-camera" aria-hidden="true"></i> Portifólios
+        </a>
+    </li>
     {{--SERVICES--}}
     <li>
         <a href='{{route('services.index')}}' alt='Serviços' title='Serviços'>
