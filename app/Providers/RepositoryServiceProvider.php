@@ -35,6 +35,10 @@ class RepositoryServiceProvider extends ServiceProvider
                 \App\Repositories\PostRepository::class, 
                 \App\Repositories\PostRepositoryEloquent::class
         );
+        $this->app->bind(
+                \App\Repositories\BannerRepository::class, 
+                \App\Repositories\BannerRepositoryEloquent::class
+        );
         //:end-bindings:
     }
 }
