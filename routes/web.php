@@ -23,6 +23,7 @@ Route::group([
             ], function() 
 {
     Route::get('/', 'PainelController@index');
+    Route::resource('post_categories', 'PostCategoryController');
 });
 
 
