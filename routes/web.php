@@ -24,6 +24,11 @@ Route::group([
 {
     Route::get('/', 'PainelController@index');
     Route::resource('post_categories', 'PostCategoryController');
+    Route::resource('posts', 'PostController');
+
+    Route::get('upload', 'UploadController@index');
+    Route::post('upload/upload', 'UploadController@upload')->name('upload.upload');
+    Route::get('upload/delete/{file}', 'UploadController@delete')->name('upload.delete');
 });
 
 

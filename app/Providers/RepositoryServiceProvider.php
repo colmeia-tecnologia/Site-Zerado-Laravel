@@ -31,6 +31,10 @@ class RepositoryServiceProvider extends ServiceProvider
                 \App\Repositories\PostCategoryRepository::class, 
                 \App\Repositories\PostCategoryRepositoryEloquent::class
         );
+        $this->app->bind(
+                \App\Repositories\PostRepository::class, 
+                \App\Repositories\PostRepositoryEloquent::class
+        );
         //:end-bindings:
     }
 }
