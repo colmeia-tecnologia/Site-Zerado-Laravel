@@ -23,6 +23,12 @@
             <i class="fa fa-user" aria-hidden="true"></i> Usuários
         </a>
     </li>
+    {{--Users--}}
+    <li>
+        <a href='{{url('/users/'.Auth::user()->id.'/edit')}}' alt='Meus dados' title='Meus dados'>
+            <i class="fa fa-user" aria-hidden="true"></i> Meus dados
+        </a>
+    </li>
 
     {{--BLOG--}}
     <li class='menuLabel'>
