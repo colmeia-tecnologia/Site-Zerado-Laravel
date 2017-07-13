@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Painel\PortfolioRequest;
 use App\Repositories\PortfolioRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Spatie\Activitylog\Models\Activity;
 
@@ -25,6 +26,9 @@ class PortfolioController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('view-portfolios'))
+            return redirect('/');
+
         $portfolios = $this->repository->paginate();
 
         return view('painel.portfolios.index', compact('portfolios'));
@@ -37,6 +41,9 @@ class PortfolioController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('create-portfolios'))
+            return redirect('/');
+
         return view('painel.portfolios.create');
     }
 
@@ -48,6 +55,9 @@ class PortfolioController extends Controller
      */
     public function store(PortfolioRequest $request)
     {
+        if(Gate::denies('create-portfolios'))
+            return redirect('/');
+            
         $data = $request->all();
         $data['image'] = str_replace("://painel.", '://', $data['image']);
 
@@ -81,6 +91,9 @@ class PortfolioController extends Controller
      */
     public function edit($id)
     {
+        if(Gate::denies('update-portfolios'))
+            return redirect('/');
+            
         $portfolio = $this->repository->find($id);
 
         return view('painel.portfolios.edit', compact('portfolio'));
@@ -95,6 +108,9 @@ class PortfolioController extends Controller
      */
     public function update(PortfolioRequest $request, $id)
     {
+        if(Gate::denies('update-portfolios'))
+            return redirect('/');
+            
         $data = $request->all();
         $data['image'] = str_replace("://painel.", '://', $data['image']);
 
@@ -117,6 +133,9 @@ class PortfolioController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('delete-portfolios'))
+            return redirect('/');
+            
         $this->repository->delete($id);
 
         //Grava Log

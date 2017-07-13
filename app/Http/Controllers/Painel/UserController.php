@@ -5,19 +5,30 @@ namespace App\Http\Controllers\Painel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Painel\User\UserCreateRequest;
 use App\Http\Requests\Painel\User\UserUpdateRequest;
+use App\Models\Permission;
+use App\Repositories\PermissionRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Spatie\Activitylog\Models\Activity;
 
 class UserController extends Controller
 {
     private $repository;
+    private $pemissionRepository;
+    private $permissionModel;
 
-    public function __construct(UserRepository $repository)
+    public function __construct(
+                                    UserRepository $repository,
+                                    PermissionRepository $pemissionRepository,
+                                    Permission $permissionModel
+                                )
     {
         $this->repository = $repository;
+        $this->pemissionRepository = $pemissionRepository;
+        $this->permissionModel = $permissionModel;
     }
 
     /**
@@ -27,6 +38,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('view-users'))
+            return redirect('/');
+
         $users = $this->repository->paginate();
 
         return view('painel.users.index', compact('users'));
@@ -39,12 +53,18 @@ class UserController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('create-users'))
+            return redirect('/');
+
         $roles = [
             'Simples' => 'Simples', 
             'Administrador' => 'Administrador'
         ];
 
-        return view('painel.users.create', compact('roles'));
+        $permissions = $this->pemissionRepository->all();
+        $notShowPermissions = $this->permissionModel->notShowPermissions;
+
+        return view('painel.users.create', compact('roles', 'permissions', 'notShowPermissions'));
     }
 
     /**
@@ -55,12 +75,23 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
+        if(Gate::denies('create-users'))
+            return redirect('/');
+
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
 
-        $this->repository->create($data);
+        $user = $this->repository->create($data);
 
         //Grava Log
+        Activity::all()->last();
+
+        if(isset($data['permissions']))
+            $user->permissions()->sync($data['permissions']);
+        else
+            $user->permissions()->sync([]);
+
+            //Grava Log
         Activity::all()->last();
 
         Session::flash('message', ['Usuário salvo com sucesso!']); 
@@ -88,17 +119,23 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        /*if(Auth::user()->id != $id)
-            $id = Auth::user()->id;*/
+        if(Gate::denies('update-users'))
+            $id = Auth::user()->id;
 
         $roles = [
             'Simples' => 'Simples', 
             'Administrador' => 'Administrador'
         ];
 
+        $permissions = $this->pemissionRepository->all();
+        $notShowPermissions = $this->permissionModel->notShowPermissions;
+
         $user = $this->repository->find($id);
 
-        return view('painel.users.edit', compact('user', 'roles'));
+        $permissionsUser = $user->permissions;
+        $permissionsUser = $permissionsUser->toArray();
+
+        return view('painel.users.edit', compact('user', 'roles', 'permissions', 'permissionsUser', 'notShowPermissions'));
     }
 
     /**
@@ -110,6 +147,9 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, $id)
     {
+        if(Gate::denies('update-users'))
+            return redirect('/');
+
         $data = $request->all();
 
         if(isset($data['password']))
@@ -117,11 +157,20 @@ class UserController extends Controller
         else 
             unset($data['password']);
 
-
         if($data['email'] == Auth::user()->email)
             unset($data['email']);
 
         $this->repository->update($data, $id);
+
+        //Grava Log
+        Activity::all()->last();
+
+        $user = $this->repository->find($id);
+
+        if(isset($data['permissions']))
+            $user->permissions()->sync($data['permissions']);
+        else
+            $user->permissions()->sync([]);
 
         //Grava Log
         Activity::all()->last();
@@ -133,7 +182,8 @@ class UserController extends Controller
         Session::flash('message', ['Usuário alterado com sucesso!']); 
         Session::flash('alert-type', 'alert-success'); 
 
-        return redirect()->route('users.index');
+        //return redirect()->route('users.index');
+        return redirect()->back();
     }
 
     /**
@@ -144,6 +194,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('delete-users'))
+            return redirect('/');
+
         $this->repository->delete($id);
 
         //Grava Log

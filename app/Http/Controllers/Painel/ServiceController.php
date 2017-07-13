@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Painel\ServiceRequest;
 use App\Repositories\ServiceRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Spatie\Activitylog\Models\Activity;
 
@@ -25,6 +26,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('view-services'))
+            return redirect('/');
+
         $services = $this->repository->paginate();
 
         return view('painel.services.index', compact('services'));
@@ -37,6 +41,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('create-services'))
+            return redirect('/');
+
         return view('painel.services.create');
     }
 
@@ -48,6 +55,9 @@ class ServiceController extends Controller
      */
     public function store(ServiceRequest $request)
     {
+        if(Gate::denies('create-services'))
+            return redirect('/');
+
         $data = $request->all();
 
         $this->repository->create($data);
@@ -80,6 +90,9 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
+        if(Gate::denies('update-services'))
+            return redirect('/');
+
         $service = $this->repository->find($id);
 
         return view('painel.services.edit', compact('service'));
@@ -94,6 +107,9 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(Gate::denies('update-services'))
+            return redirect('/');
+
         $data = $request->all();
 
         $this->repository->update($data, $id);
@@ -115,6 +131,9 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('delete-services'))
+            return redirect('/');
+
         $this->repository->delete($id);
 
         //Grava Log

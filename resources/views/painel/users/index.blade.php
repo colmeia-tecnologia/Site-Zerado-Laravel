@@ -5,13 +5,15 @@
         <h1>Usuários</h1>
     </div>
 
-    <div class='col-md-12 text-center'>
-        <a href='{{route('users.create')}}' alt='Cadastrar' title='Cadastrar' class='btn btn-default'>
-            Cadastrar
-        </a>
-        <br/>
-        <br/>
-    </div>
+    @can('create-users')
+        <div class='col-md-12 text-center'>
+            <a href='{{route('users.create')}}' alt='Cadastrar' title='Cadastrar' class='btn btn-default'>
+                Cadastrar
+            </a>
+            <br/>
+            <br/>
+        </div>
+    @endcan
 
     <table class="table table-responsive table-striped table-bordered table-hovered">
         <thead>
@@ -26,13 +28,23 @@
             @forelse ($users as $user)
             <tr>
                 <td>
-                    {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete', 'style' => 'display: inline']) !!}
-                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
+                    @can('delete-users')
+                        {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete', 'style' => 'display: inline']) !!}
+                            {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                    @endcan
 
-                    <a href='users/{{$user->id}}/edit' class='btn btn-info'>
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </a>
+                    @can('update-users')
+                        <a href='users/{{$user->id}}/edit' class='btn btn-info'>
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                    @endcan
+
+                    @if(Auth::user()->id == $user->id)
+                        <a href='users/{{$user->id}}/edit' class='btn btn-info'>
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                    @endif
                 </td>
                 <td>{{$user->id}}</td>
                 <td>{{$user->name}}</td>

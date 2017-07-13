@@ -47,6 +47,14 @@ class RepositoryServiceProvider extends ServiceProvider
                 \App\Repositories\PortfolioRepository::class, 
                 \App\Repositories\PortfolioRepositoryEloquent::class
         );
+        $this->app->bind(
+                \App\Repositories\PermissionRepository::class, 
+                \App\Repositories\PermissionRepositoryEloquent::class
+        );
+        $this->app->bind(
+                \App\Repositories\PermissionUserRepository::class, 
+                \App\Repositories\PermissionUserRepositoryEloquent::class
+        );
         //:end-bindings:
     }
 }

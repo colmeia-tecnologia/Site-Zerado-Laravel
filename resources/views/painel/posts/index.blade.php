@@ -5,13 +5,15 @@
         <h1>Posts</h1>
     </div>
 
-    <div class='col-md-12 text-center'>
-        <a href='{{url('/posts/create')}}' alt='Cadastrar' title='Cadastrar' class='btn btn-default'>
-            Cadastrar
-        </a>
-        <br/>
-        <br/>
-    </div>
+    @can('create-posts')
+        <div class='col-md-12 text-center'>
+            <a href='{{url('/posts/create')}}' alt='Cadastrar' title='Cadastrar' class='btn btn-default'>
+                Cadastrar
+            </a>
+            <br/>
+            <br/>
+        </div>
+    @endcan
 
     <table class="table table-responsive table-striped table-bordered table-hovered">
         <thead>
@@ -27,13 +29,17 @@
             @forelse ($posts as $post)
             <tr>
                 <td>
-                    {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete', 'style' => 'display: inline']) !!}
-                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
+                    @can('delete-posts')
+                        {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete', 'style' => 'display: inline']) !!}
+                            {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                    @endcan
 
-                    <a href='posts/{{$post->id}}/edit' class='btn btn-info'>
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </a>
+                    @can('update-posts')
+                        <a href='posts/{{$post->id}}/edit' class='btn btn-info'>
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                    @endcan
                 </td>
                 <td>{{$post->id}}</td>
                 <td>{{$post->title}}</td>

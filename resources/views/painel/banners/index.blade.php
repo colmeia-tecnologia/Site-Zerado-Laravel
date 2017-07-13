@@ -5,13 +5,15 @@
         <h1>Banners</h1>
     </div>
 
-    <div class='col-md-12 text-center'>
-        <a href='{{route('banners.create')}}' alt='Cadastrar' title='Cadastrar' class='btn btn-default'>
-            Cadastrar
-        </a>
-        <br/>
-        <br/>
-    </div>
+    @can('create-banners')
+        <div class='col-md-12 text-center'>
+            <a href='{{route('banners.create')}}' alt='Cadastrar' title='Cadastrar' class='btn btn-default'>
+                Cadastrar
+            </a>
+            <br/>
+            <br/>
+        </div>
+    @endcan
 
     <table class="table table-responsive table-striped table-bordered table-hovered">
         <thead>
@@ -27,13 +29,17 @@
             @forelse ($banners as $banner)
             <tr>
                 <td>
-                    {!! Form::open(['route' => ['banners.destroy', $banner->id], 'method' => 'delete', 'style' => 'display: inline']) !!}
-                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
+                    @can('delete-banners')
+                        {!! Form::open(['route' => ['banners.destroy', $banner->id], 'method' => 'delete', 'style' => 'display: inline']) !!}
+                            {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                    @endcan
 
-                    <a href='banners/{{$banner->id}}/edit' class='btn btn-info'>
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </a>
+                    @can('update-banners')
+                        <a href='banners/{{$banner->id}}/edit' class='btn btn-info'>
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                    @endcan
                 </td>
                 <td>{{$banner->id}}</td>
                 <td>{{$banner->title}}</td>

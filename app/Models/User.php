@@ -55,6 +55,37 @@ class User extends Authenticatable implements Transformable
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'id', 'author');
+        return $this->hasMany(Post::class, 'id', 'author_id');
+    }
+
+    /**
+     * User's permission
+     * @return [Collection][Permission] User's Permission
+     */
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function permissionsArray()
+    {
+        $permissions = array();
+
+        foreach($this->permissions as $permission) {
+            $permissions[] = $permission;
+        }
+
+        return $permissions;
+    }
+
+
+    /**
+     * Check if user has permission
+     * @param  Permission $permission
+     * @return boolean
+     */
+    public function hasPermission($permissions)
+    {        
+        return $this->permissions->contains($permissions);
     }
 }

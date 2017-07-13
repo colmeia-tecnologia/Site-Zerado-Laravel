@@ -5,13 +5,15 @@
         <h1>Serviços</h1>
     </div>
 
-    <div class='col-md-12 text-center'>
-        <a href='{{route('services.create')}}' alt='Cadastrar' title='Cadastrar' class='btn btn-default'>
-            Cadastrar
-        </a>
-        <br/>
-        <br/>
-    </div>
+    @can('create-services')
+        <div class='col-md-12 text-center'>
+            <a href='{{route('services.create')}}' alt='Cadastrar' title='Cadastrar' class='btn btn-default'>
+                Cadastrar
+            </a>
+            <br/>
+            <br/>
+        </div>
+    @endcan
 
     <table class="table table-responsive table-striped table-bordered table-hovered">
         <thead>
@@ -26,13 +28,17 @@
             @forelse ($services as $service)
             <tr>
                 <td>
-                    {!! Form::open(['route' => ['services.destroy', $service->id], 'method' => 'delete', 'style' => 'display: inline']) !!}
-                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
+                    @can('delete-services')
+                        {!! Form::open(['route' => ['services.destroy', $service->id], 'method' => 'delete', 'style' => 'display: inline']) !!}
+                            {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                    @endcan
 
-                    <a href='services/{{$service->id}}/edit' class='btn btn-info'>
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </a>
+                    @can('update-services')
+                        <a href='services/{{$service->id}}/edit' class='btn btn-info'>
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                    @endcan
                 </td>
                 <td>{{$service->id}}</td>
                 <td>{{$service->name}}</td>

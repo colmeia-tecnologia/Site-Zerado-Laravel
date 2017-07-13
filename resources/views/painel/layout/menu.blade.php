@@ -1,28 +1,36 @@
 <ul>
     {{--BANNERS--}}
-    <li>
-        <a href='{{route('banners.index')}}' alt='Banners' title='Banners'>
-            <i class="fa fa-picture-o" aria-hidden="true"></i> Banners
-        </a>
-    </li>
+    @can('view-banners')
+        <li>
+            <a href='{{route('banners.index')}}' alt='Banners' title='Banners'>
+                <i class="fa fa-picture-o" aria-hidden="true"></i> Banners
+            </a>
+        </li>
+    @endcan
     {{--PORTFOLIO--}}
-    <li>
-        <a href='{{url('/portfolios')}}' alt='Portifólios' title='Portifólios'>
-            <i class="fa fa-camera" aria-hidden="true"></i> Portifólios
-        </a>
-    </li>
+    @can('view-portfolios')
+        <li>
+            <a href='{{url('/portfolios')}}' alt='Portifólios' title='Portifólios'>
+                <i class="fa fa-camera" aria-hidden="true"></i> Portifólios
+            </a>
+        </li>
+    @endcan
     {{--SERVICES--}}
-    <li>
-        <a href='{{route('services.index')}}' alt='Serviços' title='Serviços'>
-            <i class="fa fa-wrench" aria-hidden="true"></i> Serviços
-        </a>
-    </li>
+    @can('view-services')
+        <li>
+            <a href='{{route('services.index')}}' alt='Serviços' title='Serviços'>
+                <i class="fa fa-wrench" aria-hidden="true"></i> Serviços
+            </a>
+        </li>
+    @endcan
     {{--Users--}}
-    <li>
-        <a href='{{route('users.index')}}' alt='Usuários' title='Usuários'>
-            <i class="fa fa-user" aria-hidden="true"></i> Usuários
-        </a>
-    </li>
+    @can('view-users')
+        <li>
+            <a href='{{route('users.index')}}' alt='Usuários' title='Usuários'>
+                <i class="fa fa-user" aria-hidden="true"></i> Usuários
+            </a>
+        </li>
+    @endcan
     {{--Users--}}
     <li>
         <a href='{{url('/users/'.Auth::user()->id.'/edit')}}' alt='Meus dados' title='Meus dados'>
@@ -35,15 +43,19 @@
         Blog
     </li>
     {{--POST_CATEGORIES--}}
-    <li>
-        <a href='{{route('post_categories.index')}}' alt='Categorias Post' title='Categorias Post'>
-            <i class="fa fa-list" aria-hidden="true"></i> Categorias Post
-        </a>
-    </li>
+    @can('view-post_categories')
+        <li>
+            <a href='{{route('post_categories.index')}}' alt='Categorias Post' title='Categorias Post'>
+                <i class="fa fa-list" aria-hidden="true"></i> Categorias Post
+            </a>
+        </li>
+    @endcan
     {{--POSTS--}}
-    <li>
-        <a href='{{url('/posts')}}' title='Posts' alt='Posts' title='Posts'>
-            <i class="fa fa-file-text"></i> Posts
-        </a>
-    </li>
+    @can('view-posts')
+        <li>
+            <a href='{{url('/posts')}}' title='Posts' alt='Posts' title='Posts'>
+                <i class="fa fa-file-text"></i> Posts
+            </a>
+        </li>
+    @endcan
 </ul>

@@ -7,6 +7,7 @@ use App\Http\Requests\Painel\PostRequest;
 use App\Repositories\PostCategoryRepository;
 use App\Repositories\PostRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Spatie\Activitylog\Models\Activity;
 
@@ -31,6 +32,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('view-posts'))
+            return redirect('/');
+
         $posts = $this->repository->paginate();
 
         return view('painel.posts.index', compact('posts'));
@@ -43,6 +47,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('create-posts'))
+            return redirect('/');
+
         $postCategories = $this->categoryRepository->comboboxList();
 
         return view('painel.posts.create', compact('postCategories'));
@@ -56,6 +63,9 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
+        if(Gate::denies('create-posts'))
+            return redirect('/');
+
         $data = $request->all();
         $data['author_id'] = Auth::user()->id;
 
@@ -89,6 +99,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        if(Gate::denies('update-posts'))
+            return redirect('/');
+
         $postCategories = $this->categoryRepository->comboboxList();
         $post = $this->repository->find($id);
 
@@ -104,6 +117,9 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, $id)
     {
+        if(Gate::denies('update-posts'))
+            return redirect('/');
+
         $data = $request->all();
 
         $this->repository->update($data, $id);
@@ -125,6 +141,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('delete-posts'))
+            return redirect('/');
+
         $this->repository->delete($id);
 
         //Grava Log

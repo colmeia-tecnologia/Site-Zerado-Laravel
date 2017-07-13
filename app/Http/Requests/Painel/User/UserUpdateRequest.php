@@ -27,7 +27,8 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|max:100',
-            'email' => 'required|email|unique:users,email,'.Auth::user()->id,
+            //'email' => 'required|email|unique:users,email,'.Auth::user()->id,
+            'email' => 'required|email',
             'password' => 'same:confirmation',
         ];
     }
@@ -40,7 +41,7 @@ class UserUpdateRequest extends FormRequest
 
             'email.required' => 'O campo "E-mail" é obrigatório',
             'email.email' => 'E-mail inválido',
-            'email.unique' => 'E-mail já cadastrado',
+            //'email.unique' => 'E-mail já cadastrado',
 
             'password.same' => 'O campo "Senha" deve ser igual ao campo "Confirmação de senha"',
         ];

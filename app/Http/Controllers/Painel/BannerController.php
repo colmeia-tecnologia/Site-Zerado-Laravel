@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Painel\BannerRequest;
 use App\Repositories\BannerRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Spatie\Activitylog\Models\Activity;
 
@@ -25,6 +26,9 @@ class BannerController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('view-banners'))
+            return redirect('/');
+
         $banners = $this->repository->paginate();
 
         return view('painel.banners.index', compact('banners'));
@@ -37,6 +41,9 @@ class BannerController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('create-banners'))
+            return redirect('/');
+
         return view('painel.banners.create');
     }
 
@@ -48,6 +55,9 @@ class BannerController extends Controller
      */
     public function store(BannerRequest $request)
     {
+        if(Gate::denies('create-banners'))
+            return redirect('/');
+
         $data = $request->all();
         $data['image'] = str_replace("://painel.", '://', $data['image']);
 
@@ -81,6 +91,9 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
+        if(Gate::denies('update-banners'))
+            return redirect('/');
+
         $banner = $this->repository->find($id);
 
         return view('painel.banners.edit', compact('banner'));
@@ -95,6 +108,9 @@ class BannerController extends Controller
      */
     public function update(BannerRequest $request, $id)
     {
+        if(Gate::denies('update-banners'))
+            return redirect('/');
+
         $data = $request->all();
         $data['image'] = str_replace("://painel.", '://', $data['image']);
 
@@ -117,6 +133,9 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('delete-banners'))
+            return redirect('/');
+
         $this->repository->delete($id);
 
         //Grava Log

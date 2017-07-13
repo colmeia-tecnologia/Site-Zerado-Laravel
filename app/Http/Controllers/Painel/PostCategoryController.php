@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Painel\PostCategoryRequest;
 use App\Repositories\PostCategoryRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Spatie\Activitylog\Models\Activity;
 
@@ -25,6 +26,9 @@ class PostCategoryController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('view-post_categories'))
+            return redirect('/');
+
         $postCategories = $this->repository->paginate();
 
         return view('painel.post_categories.index', compact('postCategories'));
@@ -37,6 +41,9 @@ class PostCategoryController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('create-post_categories'))
+            return redirect('/');
+
         return view('painel.post_categories.create');
     }
 
@@ -48,6 +55,9 @@ class PostCategoryController extends Controller
      */
     public function store(PostCategoryRequest $request)
     {
+        if(Gate::denies('create-post_categories'))
+            return redirect('/');
+
         $data = $request->all();
 
         $this->repository->create($data);
@@ -80,6 +90,9 @@ class PostCategoryController extends Controller
      */
     public function edit($id)
     {
+        if(Gate::denies('update-post_categories'))
+            return redirect('/');
+
         $postCategory = $this->repository->find($id);
 
         return view('painel.post_categories.edit', compact('postCategory'));
@@ -94,6 +107,9 @@ class PostCategoryController extends Controller
      */
     public function update(PostCategoryRequest $request, $id)
     {
+        if(Gate::denies('update-post_categories'))
+            return redirect('/');
+
         $data = $request->all();
 
         $this->repository->update($data, $id);
@@ -115,6 +131,9 @@ class PostCategoryController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('delete-post_categories'))
+            return redirect('/');
+
         $this->repository->delete($id);
 
         //Grava Log

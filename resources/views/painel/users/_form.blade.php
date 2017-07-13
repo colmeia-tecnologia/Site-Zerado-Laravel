@@ -35,6 +35,66 @@
     </div>
 {{--@endif--}}
 
+<hr>
+
+@can('update-permissions')
+    <div class='col-md-12'>
+        <h2 class='text-center'>Permissões</h2>
+
+        <div class='table-responsive'>
+            <table class='table table-striped table-bordered'>
+                <tr>
+                    <td colspan='4' class='tableLabel'>
+                        Painel
+                    </td>
+                </tr>
+                <tr>
+                    @php
+                        $i=0;
+                    @endphp
+
+                    @foreach ($permissions as $permission)
+                        @if ($i%4 == 0)
+                            </tr>
+                            <tr>
+                        @endif
+
+                        @if($permission->description == 'Visualizar categorias de posts')
+                            <tr>
+                                <td colspan='4' class='tableLabel'>
+                                    Blog
+                                </td>
+                            </tr>
+                        @endif
+
+                        <td class='text-center'>
+                            <label>
+                                @if(!in_array($permission->name, $notShowPermissions))
+                                    @if(!isset($user))
+                                        {!! Form::checkbox('permissions[]', $permission->id, false, ['id' => 'permission_'.$permission->id]) !!} {{$permission->description}}
+                                    @else
+                                        @php
+                                            $item = $permission->toArray();
+
+                                            $selected = in_array($item, $permissionsUser);
+                                        @endphp
+
+                                        {!! Form::checkbox('permissions[]', $permission->id, $selected, ['id' => 'permission_'.$permission->id]) !!} {{$permission->description}}
+                                    @endif
+                                @endif
+                            </label>
+                        </td>
+
+                        @php
+                            $i++;
+                        @endphp
+                    @endforeach
+                </tr>
+            </table>
+        </div>
+    </div>
+@endcan
+
 <div class='col-md-12 text-center margin-top'>
     {!! Form::button('<i class="fa fa-check" aria-hidden="true"></i> Salvar&nbsp;', ['type' => 'submit', 'class' => 'btn btn-primary']) !!}
 </div>
