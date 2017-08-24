@@ -68,6 +68,7 @@ class PostController extends Controller
 
         $data = $request->all();
         $data['author_id'] = Auth::user()->id;
+        $data['image'] = str_replace("://painel.", '://', $data['image']);
 
         $this->repository->create($data);
 
@@ -121,6 +122,7 @@ class PostController extends Controller
             return redirect('/');
 
         $data = $request->all();
+        $data['image'] = str_replace("://painel.", '://', $data['image']);
 
         $this->repository->update($data, $id);
 

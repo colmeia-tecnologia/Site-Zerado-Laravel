@@ -47,7 +47,7 @@
 
 <div class='col-md-8 margin-top'>
     <label for='text'>Texto</label>
-    <textarea name="text" id='text' id='text' class='tinymce'>{{$post->text or ''}}</textarea>
+    <textarea name="text" id='text' class='tinymce'>{{$post->text or old('text')}}</textarea>
 </div>
 
 <div class='clearfix'></div>

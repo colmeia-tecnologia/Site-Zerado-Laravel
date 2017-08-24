@@ -23,6 +23,14 @@
             </a>
         </li>
     @endcan
+    {{--CLIENTS--}}
+    @can('view-services')
+        <li>
+            <a href='{{route('clients.index')}}' alt='Clientes' title='Clientes'>
+                <i class="fa fa-users" aria-hidden="true"></i> Clientes
+            </a>
+        </li>
+    @endcan
     {{--Users--}}
     @can('view-users')
         <li>
