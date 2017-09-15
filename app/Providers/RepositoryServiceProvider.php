@@ -59,6 +59,10 @@ class RepositoryServiceProvider extends ServiceProvider
                 \App\Repositories\ClientRepository::class, 
                 \App\Repositories\ClientRepositoryEloquent::class
         );
+        $this->app->bind(
+                \App\Repositories\VideoRepository::class, 
+                \App\Repositories\VideoRepositoryEloquent::class
+        );
         //:end-bindings:
     }
 }

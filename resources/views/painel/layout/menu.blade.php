@@ -31,6 +31,14 @@
             </a>
         </li>
     @endcan
+    {{--VIDEOS--}}
+    @can('view-videos')
+        <li>
+            <a href='{{route('videos.index')}}' alt='Videos' title='Videos'>
+                <i class="fa fa-video-camera" aria-hidden="true"></i> Videos
+            </a>
+        </li>
+    @endcan
     {{--Users--}}
     @can('view-users')
         <li>

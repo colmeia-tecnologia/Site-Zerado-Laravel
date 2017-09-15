@@ -16,7 +16,8 @@ class PermissionsTableSeeder extends Seeder
                         'banners'           => 'banners',
                         'portfolios'        => 'portifólio',
                         'services'          => 'serviços',
-                        'clients'          => 'clientes',
+                        'clients'           => 'clientes',
+                        'videos'            => 'videos',
                         'users'             => 'usuários',
                         'permissions'       => 'permissões',
                         //Blog

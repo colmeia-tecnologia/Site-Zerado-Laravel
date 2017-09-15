@@ -22,16 +22,26 @@ Route::group([
                 'middleware' => 'auth'
             ], function() 
 {
+    //Painel
     Route::get('/', 'PainelController@index');
     Route::resource('banners', 'BannerController');
     Route::resource('services', 'ServiceController');
     Route::resource('portfolios', 'PortfolioController');
     Route::resource('clients', 'ClientController');
+    Route::resource('videos', 'VideoController');
     Route::resource('users', 'UserController');
     
+    //Blog
     Route::resource('post_categories', 'PostCategoryController');
     Route::resource('posts', 'PostController');
 
+
+    //Validações Video
+    Route::post('videos/verificaUrlCurta', 'VideoController@verifyShortenUrl')->name('videos.verificaUrlCurta');
+    Route::post('videos/verificaUrlYoutubeValida', 'VideoController@verifyValidYoutubeUrl')->name('videos.verificaUrlYoutubeValida');
+    Route::post('videos/obtemImagemYoutube', 'VideoController@getYoutubeThumb')->name('videos.obtemImagemYoutube');
+
+    //Upload
     Route::get('upload', 'UploadController@index');
     Route::post('upload/upload', 'UploadController@upload')->name('upload.upload');
     Route::get('upload/delete/{file}', 'UploadController@delete')->name('upload.delete');
