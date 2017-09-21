@@ -23,7 +23,7 @@ class User extends Authenticatable implements Transformable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role'
+        'name', 'email', 'password', 'role', 'active'
     ];
 
     /**
@@ -43,7 +43,8 @@ class User extends Authenticatable implements Transformable
     protected static $logAttributes = [
         'name', 
         'email',  
-        'role'
+        'role',
+        'active'
     ];
 
     /**

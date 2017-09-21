@@ -22,6 +22,7 @@
                 <th width="100px">ID</th>
                 <th>Nome</th>
                 <th>Perfil</th>
+                <th width="100px">Ativo</th>
             </tr>
         </thead>
         <tbody>
@@ -49,10 +50,20 @@
                 <td>{{$user->id}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->role}}</td>
+                <td>
+                    @php
+                        $checked = '';
+
+                        if($user->active == true)
+                            $checked = 'checked';
+                    @endphp
+
+                    <input type="checkbox" {{$checked}} class='checkboxActive' data-model="User" data-id="{{$user->id}}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ativo" data-off="Inativo" >
+                </td>
             </tr>
             @empty
             <tr>
-                <td colspan='3' class='text-center'>
+                <td colspan='4' class='text-center'>
                     Nenhuma Categoria de Post cadastrada
                 </td>
             </tr>

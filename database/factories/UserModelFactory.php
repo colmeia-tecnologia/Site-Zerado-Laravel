@@ -21,5 +21,6 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'password' => $password ?: $password = bcrypt('secret'),
         'role' => 'User',
         'remember_token' => str_random(10),
+        'active' => false,
     ];
 });

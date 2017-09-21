@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
             'password' => '$2y$10$sbyaGhD6rG8MY1g4FArA/Oo9fsOMX/M1CN88cLO4HnUkJ3SgGpnue', 
             'role' => 'Administrador',
             'remember_token' => str_random(10),
+            'active' => true,
         ]);
     }
 }
