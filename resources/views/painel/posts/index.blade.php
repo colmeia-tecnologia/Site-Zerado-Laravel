@@ -23,6 +23,7 @@
                 <th>Titulo</th>
                 <th>Descrição</th>
                 <th width="150px">Imagem</th>
+                <th width="100px">Ativo</th>
             </tr>
         </thead>
         <tbody>
@@ -47,10 +48,20 @@
                 <td>
                     <img src='{{$post->image}}' class='img-responsive'>
                 </td>
+                <td>
+                    @php
+                        $checked = '';
+
+                        if($post->active == true)
+                            $checked = 'checked';
+                    @endphp
+
+                    <input type="checkbox" {{$checked}} class='checkboxActive' data-model="Post" data-id="{{$post->id}}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ativo" data-off="Inativo" >
+                </td>
             </tr>
             @empty
             <tr>
-                <td colspan='5' class='text-center'>
+                <td colspan='6' class='text-center'>
                     Nenhum Post cadastrado
                 </td>
             </tr>

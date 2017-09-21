@@ -46,7 +46,16 @@
                 <td>
                     <img src='{{$banner->image}}' class='img-responsive'>
                 </td>
-                <td></td>
+                <td>
+                    @php
+                        $checked = '';
+
+                        if($banner->active == true)
+                            $checked = 'checked';
+                    @endphp
+
+                    <input type="checkbox" {{$checked}} class='checkboxActive' data-model="Banner" data-id="{{$banner->id}}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ativo" data-off="Inativo" >
+                </td>
             </tr>
             @empty
             <tr>

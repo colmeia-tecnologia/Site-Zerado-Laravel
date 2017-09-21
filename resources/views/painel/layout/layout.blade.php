@@ -92,6 +92,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/painel/toggle/toggle.min.js') }}"></script>
         @yield('scripts')
     </body>
 </html>

@@ -48,7 +48,16 @@
                 <td>
                     <img src='{{$portfolio->image}}' class='img-responsive'>
                 </td>
-                <td></td>
+                <td>
+                    @php
+                        $checked = '';
+
+                        if($portfolio->active == true)
+                            $checked = 'checked';
+                    @endphp
+
+                    <input type="checkbox" {{$checked}} class='checkboxActive' data-model="Portfolio" data-id="{{$portfolio->id}}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ativo" data-off="Inativo" >
+                </td>
             </tr>
             @empty
             <tr>

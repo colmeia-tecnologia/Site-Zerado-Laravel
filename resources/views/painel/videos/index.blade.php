@@ -48,11 +48,20 @@
                 <td>
                     <img src='{{$video->image}}' class='img-responsive'>
                 </td>
-                <td></td>
+                <td>
+                    @php
+                        $checked = '';
+
+                        if($video->active == true)
+                            $checked = 'checked';
+                    @endphp
+
+                    <input type="checkbox" {{$checked}} class='checkboxActive' data-model="Video" data-id="{{$video->id}}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ativo" data-off="Inativo" >
+                </td>
             </tr>
             @empty
             <tr>
-                <td colspan='5' class='text-center'>
+                <td colspan='6' class='text-center'>
                     Nenhum Video cadastrado
                 </td>
             </tr>

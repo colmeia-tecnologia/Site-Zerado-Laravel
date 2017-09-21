@@ -22,6 +22,7 @@
                 <th width="100px">ID</th>
                 <th>Nome</th>
                 <th width="150px">Icone</th>
+                <th width="100px">Ativo</th>
             </tr>
         </thead>
         <tbody>
@@ -43,10 +44,20 @@
                 <td>{{$service->id}}</td>
                 <td>{{$service->name}}</td>
                 <td>{!!$service->icon!!}</i></td>
+                <td>
+                    @php
+                        $checked = '';
+
+                        if($service->active == true)
+                            $checked = 'checked';
+                    @endphp
+
+                    <input type="checkbox" {{$checked}} class='checkboxActive' data-model="Service" data-id="{{$service->id}}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ativo" data-off="Inativo" >
+                </td>
             </tr>
             @empty
             <tr>
-                <td colspan='4' class='text-center'>
+                <td colspan='5' class='text-center'>
                     Nenhum Serviço cadastrado
                 </td>
             </tr>

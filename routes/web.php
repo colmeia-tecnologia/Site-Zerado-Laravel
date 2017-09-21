@@ -45,6 +45,9 @@ Route::group([
     Route::get('upload', 'UploadController@index');
     Route::post('upload/upload', 'UploadController@upload')->name('upload.upload');
     Route::get('upload/delete/{file}', 'UploadController@delete')->name('upload.delete');
+
+    //Ativo/Inativo
+    Route::post('/activate-inactivate', 'ActivateController@activateInactivate')->name('activate-inactivate');
 });
 
 
