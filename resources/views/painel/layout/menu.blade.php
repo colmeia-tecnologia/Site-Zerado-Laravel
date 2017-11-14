@@ -39,6 +39,22 @@
             </a>
         </li>
     @endcan
+    {{--PRODUCT_CATEGORIES--}}
+    @can('view-product_categories')
+        <li>
+            <a href='{{route('product_categories.index')}}' alt='Categorias Produto' title='Categorias Produto'>
+                <i class="fa fa-list" aria-hidden="true"></i> Categorias Produto
+            </a>
+        </li>
+    @endcan
+    {{--PRODUCT_SUBCATEGORIES--}}
+    @can('view-product_subcategories')
+        <li>
+            <a href='{{route('product_subcategories.index')}}' alt='Subcategorias Produto' title='Subcategorias Produto'>
+                <i class="fa fa-list" aria-hidden="true"></i> Subcategorias Produto
+            </a>
+        </li>
+    @endcan
     {{--Users--}}
     @can('view-users')
         <li>
@@ -47,7 +63,7 @@
             </a>
         </li>
     @endcan
-    {{--Users--}}
+    {{--Meus Dados--}}
     <li>
         <a href='{{url('/users/'.Auth::user()->id.'/edit')}}' alt='Meus dados' title='Meus dados'>
             <i class="fa fa-user" aria-hidden="true"></i> Meus dados

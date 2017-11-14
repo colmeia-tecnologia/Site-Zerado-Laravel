@@ -30,6 +30,8 @@ Route::group([
     Route::resource('clients', 'ClientController');
     Route::resource('videos', 'VideoController');
     Route::resource('users', 'UserController');
+    Route::resource('product_categories', 'ProductCategoryController');
+    Route::resource('product_subcategories', 'ProductSubcategoryController');
     
     //Blog
     Route::resource('post_categories', 'PostCategoryController');

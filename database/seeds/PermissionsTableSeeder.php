@@ -13,16 +13,18 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         $tables =  [
-                        'banners'           => 'banners',
-                        'portfolios'        => 'portifólio',
-                        'services'          => 'serviços',
-                        'clients'           => 'clientes',
-                        'videos'            => 'videos',
-                        'users'             => 'usuários',
-                        'permissions'       => 'permissões',
+                        'banners'               => 'banners',
+                        'portfolios'            => 'portifólio',
+                        'services'              => 'serviços',
+                        'clients'               => 'clientes',
+                        'videos'                => 'videos',
+                        'product_categories'    => 'categorias de produtos',
+                        'product_subcategories' => 'subcategorias de produtos',
+                        'users'                 => 'usuários',
+                        'permissions'           => 'permissões',
                         //Blog
-                        'post_categories'   => 'categorias de posts',
-                        'posts'             => 'posts',
+                        'post_categories'       => 'categorias de posts',
+                        'posts'                 => 'posts',
                     ];
 
         $permissions =  [
