@@ -57,7 +57,7 @@ class UserController extends Controller
             return redirect('/');
 
         $roles = [
-            'Simples' => 'Simples', 
+            'Usuário' => 'Usuário', 
             'Administrador' => 'Administrador'
         ];
 
@@ -91,7 +91,7 @@ class UserController extends Controller
         else
             $user->permissions()->sync([]);
 
-            //Grava Log
+        //Grava Log
         Activity::all()->last();
 
         Session::flash('message', ['Usuário salvo com sucesso!']); 

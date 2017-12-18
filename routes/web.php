@@ -52,10 +52,13 @@ Route::group([
     Route::post('/activate-inactivate', 'ActivateController@activateInactivate')->name('activate-inactivate');
 });
 
-
-
-Route::get('/', function () {
-    return view('welcome');
+/*
+ * SITE
+ */
+Route::group([
+                'namespace' => 'Site'
+            ], function() 
+{
+    Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/home', 'IndexController@index')->name('home');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');

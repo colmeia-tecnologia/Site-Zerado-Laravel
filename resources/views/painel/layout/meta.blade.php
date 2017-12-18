@@ -4,3 +4,5 @@
 
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
+
+<link rel='shortcut icon' href='{{ asset('img/template/favicon_colmeia.ico') }}' type='image/x-icon' />
