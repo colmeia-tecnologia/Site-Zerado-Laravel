@@ -50,6 +50,7 @@
     <textarea name="text" id='text'class='tinymce'>{{$post->text or ''}}</textarea>
     <a data-toggle="modal" href="/upload/tinymce" data-target="#uploadModalTinyMce" id="tinyMceImageModalLink"></a>
 
+    <input type='hidden' id='imageInput' name='imageInput'>
     <div class="modal fade" id="uploadModalTinyMce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -69,13 +70,17 @@
     {!! Html::script('/js/painel/upload.min.js') !!}
 
     <script>
-        $('#uploadModalTinyMce').on('hide.bs.modal', function (e) {
-            var name = $('#selectedImage').val();
+        $('#uploadModalTinyMce')
+            .on('hide.bs.modal', function (e) {
+                var input = $('#imageInput').val();
+                $('#'+input).val('');
 
-            if(name != '')
-                name = name.split('://painel.').join('://');
+                var name = $('#selectedImage').val();
 
-            $('#mceu_33-inp').val(name);
-        });
+                if(name != '')
+                    name = name.split('://painel.').join('://');
+
+                $('#'+input).val(name);
+            });
     </script>
 @endsection

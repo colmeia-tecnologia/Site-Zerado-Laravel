@@ -36,9 +36,10 @@
 <meta name='RATING' content='General, HTML' />
 <meta name='REVISIT-AFTER' content='7 days' />
 <meta name='Audience' content='All' />
+<meta property='og:type' content='website' />
 
-<meta name='url' content='http://{{$_SERVER['HTTP_HOST']}}{{$_SERVER['REQUEST_URI']}}' />
-<meta property='og:url' content='http://{{$_SERVER['HTTP_HOST']}}{{$_SERVER['REQUEST_URI']}}'/>
+<meta name='url' content='https://%{HTTP_HOST}%{REQUEST_URI://{{$_SERVER['HTTP_HOST']}}{{$_SERVER['REQUEST_URI']}}' />
+<meta property='og:url' content='https://{{$_SERVER['HTTP_HOST']}}{{$_SERVER['REQUEST_URI']}}'/>
 
 
 <title>{{ $title or config('app.name') }}</title>
@@ -52,4 +53,5 @@
 
 
 <meta property='og:image' content='{{ $image or config('app.name') }}' />
+<meta property='og:image:url' content='{{ $image or config('app.name') }}' />
 <meta itemprop='image' content='{{ $image or config('app.name') }}' />
