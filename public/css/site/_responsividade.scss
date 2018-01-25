@@ -1,0 +1,218 @@
+// main: style.scss
+
+/*
+ * XL
+ */
+@media (max-width: 1366px) 
+{
+    
+}
+
+@media (max-width: 1200px) 
+{
+    
+}
+
+
+
+/*
+ * LG
+ */
+@media (max-width: 1024px) 
+{
+    .navbar-brand img
+    {
+        width: 320px;
+    }
+
+    .responsive-iframe
+    {
+        padding-bottom: 95%;
+    }
+}
+
+@media (max-width: 960px) 
+{
+    .navbar-brand img
+    {
+        width: 224px;
+    }
+
+    .navbar ul li a
+    {
+        font-size: 1.5em;
+        padding-top: 50px;
+        padding-bottom: 15px;
+    }
+
+    .navbar
+    {
+        height: 86px;
+    }
+
+    div.content
+    {
+        margin-top: 66px;
+    }
+
+    .responsive-iframe
+    {
+        padding-bottom: 125%;
+    }
+}
+
+
+
+/*
+ * MD
+ */
+@media (max-width: 800px) 
+{
+
+}
+
+@media(max-width: 768px)
+{
+
+}
+
+@media(max-width: 736px)
+{
+    .navbar-brand img
+    {
+        width: 130px;
+    }
+
+    .navbar
+    {
+        height: 50px;
+        text-align: center;
+    }
+
+    .navbar ul
+    {
+        margin: -10px -15px;
+    }
+
+    .navbar ul li 
+    {
+        background-color: #212121;
+        border-bottom: 1px solid white;
+    }
+
+    .navbar ul li a
+    {
+        font-size: 1.5em;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color: #6d6e71;
+    }
+
+    .navbar-collapse.in
+    {
+        overflow-y: visible;
+    }
+
+    div.content
+    {
+        margin-top: 30px;
+    }
+
+    .responsive-iframe
+    {
+        padding-bottom: 50%;
+    }
+}
+
+
+
+
+/*
+ * SM
+ */
+@media(max-width: 667px)
+{
+
+}
+
+@media(max-width: 640px)
+{
+
+}
+
+@media(max-width: 600px)
+{
+
+}
+
+@media(max-width: 568px)
+{
+
+}
+
+
+
+/*
+ * XS
+ */
+@media(max-width: 480px)
+{
+    .carousel h1
+    {
+        font-size: 1.5em;
+    }
+}
+
+@media(max-width: 414px)
+{
+    .responsive-iframe
+    {
+        padding-bottom: 80%;
+    }
+}
+
+@media(max-width: 384px)
+{
+    .carousel-caption div
+    {
+        padding: 10px;
+    }
+
+    .carousel h1
+    {
+        font-size: 1.3em;
+    }
+
+    i.fa-4x
+    {
+        font-size: 3em;
+    }
+
+    .containerServices h3
+    {
+        font-size: 1.5em;
+    }
+}
+
+@media(max-width: 375px)
+{
+
+}
+
+@media(max-width: 360px)
+{
+
+}
+
+@media(max-width: 320px)
+{
+    .carousel h1
+    {
+        font-size: 1em;
+    }
+
+    .responsive-iframe
+    {
+        padding-bottom: 100%;
+    }
+}
