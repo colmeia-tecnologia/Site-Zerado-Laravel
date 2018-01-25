@@ -22,9 +22,9 @@
 RewriteEngine On
 
 #Remove www
-RewriteBase /
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+#RewriteBase /
+#RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
 #Force HTTPS
 RewriteCond %{SERVER_PORT} 80
@@ -138,3 +138,6 @@ ServerSignature Off
     mod_gzip_item_exclude mime ^image/.*
     mod_gzip_item_include handler ^cgi-script$
 </ifModule>
+
+php_value upload_max_filesize 10M
+php_value post_max_size 10M

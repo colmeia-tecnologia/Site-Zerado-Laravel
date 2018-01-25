@@ -39,6 +39,14 @@
             </a>
         </li>
     @endcan
+    {{--Documentos--}}
+    @can('view-documents')
+        <li>
+            <a href='{{route('documents.index')}}' alt='Documentos' title='Documentos'>
+                <i class="fa fa-file-o" aria-hidden="true"></i> Documentos
+            </a>
+        </li>
+    @endcan
     {{--PRODUCT_CATEGORIES--}}
     @can('view-product_categories')
         <li>

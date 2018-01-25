@@ -32,6 +32,7 @@ Route::group([
     Route::resource('users', 'UserController');
     Route::resource('product_categories', 'ProductCategoryController');
     Route::resource('product_subcategories', 'ProductSubcategoryController');
+    Route::resource('documents', 'DocumentController');
     
     //Blog
     Route::resource('post_categories', 'PostCategoryController');
