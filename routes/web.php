@@ -29,6 +29,7 @@ Route::group([
     Route::resource('portfolios', 'PortfolioController');
     Route::resource('clients', 'ClientController');
     Route::resource('videos', 'VideoController');
+    Route::resource('pages', 'PageController');
     Route::resource('users', 'UserController');
     
     //Blog

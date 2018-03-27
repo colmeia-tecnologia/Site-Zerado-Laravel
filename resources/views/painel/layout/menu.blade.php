@@ -1,4 +1,12 @@
 <ul>
+    {{--Paginas--}}
+    @can('view-pages')
+        <li>
+            <a href='{{route('pages.index')}}' alt='Páginas' title='Páginas'>
+                <i class="fa fa-file-text" aria-hidden="true"></i> Páginas
+            </a>
+        </li>
+    @endcan
     {{--BANNERS--}}
     @can('view-banners')
         <li>
