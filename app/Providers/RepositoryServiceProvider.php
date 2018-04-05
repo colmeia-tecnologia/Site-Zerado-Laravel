@@ -67,6 +67,10 @@ class RepositoryServiceProvider extends ServiceProvider
                 \App\Repositories\PageRepository::class, 
                 \App\Repositories\PageRepositoryEloquent::class
         );
+        $this->app->bind(
+                \App\Repositories\ProductCategoryRepository::class, 
+                \App\Repositories\ProductCategoryRepositoryEloquent::class
+        );
         //:end-bindings:
     }
 }

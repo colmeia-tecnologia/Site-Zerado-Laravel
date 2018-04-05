@@ -30,6 +30,7 @@ Route::group([
     Route::resource('clients', 'ClientController');
     Route::resource('videos', 'VideoController');
     Route::resource('pages', 'PageController');
+    Route::resource('product_categories', 'ProductCategoryController');
     Route::resource('users', 'UserController');
     
     //Blog

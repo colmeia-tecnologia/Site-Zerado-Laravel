@@ -47,6 +47,14 @@
             </a>
         </li>
     @endcan
+    {{--VIDEOS--}}
+    @can('view-product-categories')
+        <li>
+            <a href='{{route('product_categories.index')}}' alt='Categorias de Produtos' title='Categorias de Produtos'>
+                <i class="fa fa-list" aria-hidden="true"></i> Categorias de Produtos
+            </a>
+        </li>
+    @endcan
     {{--Users--}}
     @can('view-users')
         <li>
