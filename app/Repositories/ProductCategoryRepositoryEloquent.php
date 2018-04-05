@@ -33,4 +33,22 @@ class ProductCategoryRepositoryEloquent extends BaseRepository implements Produc
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    /**
+     * Generate Array to be used in comboboxes
+     * @return array Title,ID
+     */
+    public function comboboxList()
+    {
+        return $this->model->pluck('title', 'id');
+    }
+
+    /**
+     * Generate Array to be used in comboboxes
+     * @return array Title,ID
+     */
+    public function subcategoriesComboboxList($id)
+    {
+        return $this->model->find($id)->subcategories->pluck('title', 'id');
+    }
 }

@@ -31,6 +31,7 @@ Route::group([
     Route::resource('videos', 'VideoController');
     Route::resource('pages', 'PageController');
     Route::resource('product_categories', 'ProductCategoryController');
+    Route::resource('product_subcategories', 'ProductSubcategoryController');
     Route::resource('users', 'UserController');
     
     //Blog

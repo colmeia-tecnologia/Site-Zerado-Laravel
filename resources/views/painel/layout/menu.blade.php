@@ -47,11 +47,19 @@
             </a>
         </li>
     @endcan
-    {{--VIDEOS--}}
+    {{--PRODUCT CATEGORY--}}
     @can('view-product-categories')
         <li>
             <a href='{{route('product_categories.index')}}' alt='Categorias de Produtos' title='Categorias de Produtos'>
                 <i class="fa fa-list" aria-hidden="true"></i> Categorias de Produtos
+            </a>
+        </li>
+    @endcan
+    {{--PRODUCT SUBCATEGORY--}}
+    @can('view-product-subcategories')
+        <li>
+            <a href='{{route('product_subcategories.index')}}' alt='Subcategoria de Produtos' title='Subcategoria de Produtos'>
+                <i class="fa fa-list" aria-hidden="true"></i> Subcategoria de Produtos
             </a>
         </li>
     @endcan

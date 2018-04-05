@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
-use App\Models\ProductSubcategory;
+use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class ProductCategory extends Model implements Transformable
+class ProductSubcategory extends Model implements Transformable
 {
     use TransformableTrait;
     use SoftDeletes;
     use LogsActivity;
 
     protected $fillable = [
-        'title'
+        'product_category_id',
+        'title',
     ];
     
     /*
@@ -25,7 +26,9 @@ class ProductCategory extends Model implements Transformable
      * @var array
      */
     protected static $logAttributes = [
-        'id', 'title'
+        'id', 
+        'product_category_id', 
+        'title',
     ];
 
     /**
@@ -35,9 +38,9 @@ class ProductCategory extends Model implements Transformable
      */
     protected $dates = ['created_at', 'deleted_at'];
 
-    public function subcategories()
+    public function category()
     {
-        return $this->hasMany(ProductSubcategory::class);
+        return $this->hasOne(ProductCategory::class, 'id', 'product_category_id');
     }
 
     /*public function products()
