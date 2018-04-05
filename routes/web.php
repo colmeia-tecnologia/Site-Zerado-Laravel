@@ -44,6 +44,7 @@ Route::group([
 
     //Upload
     Route::get('upload', 'UploadController@index');
+    Route::get('/upload/tinymce', 'UploadController@index');
     Route::post('upload/upload', 'UploadController@upload')->name('upload.upload');
     Route::get('upload/delete/{file}', 'UploadController@delete')->name('upload.delete');
 

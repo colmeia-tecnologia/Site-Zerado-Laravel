@@ -1,5 +1,5 @@
 <ul>
-    {{--Paginas--}}
+    {{--PÁGINAS--}}
     @can('view-pages')
         <li>
             <a href='{{route('pages.index')}}' alt='Páginas' title='Páginas'>

@@ -41,6 +41,15 @@
 <div class='col-md-12 margin-top'>
     <label for='text'>Texto</label>
     <textarea name="text" id='text' class='tinymce'>{{$page->text or old('text')}}</textarea>
+    <a data-toggle="modal" href="/upload/tinymce" data-target="#uploadModalTinyMce" id="tinyMceImageModalLink"></a>
+
+    <input type='hidden' id='imageInput' name='imageInput'>
+    <div class="modal fade" id="uploadModalTinyMce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class='clearfix'></div>
@@ -52,4 +61,19 @@
 @section('scripts')
     {!! Html::script('/js/painel/tinymce/tinymce.min.js') !!}
     {!! Html::script('/js/painel/upload.min.js') !!}
+
+    <script>
+        $('#uploadModalTinyMce')
+            .on('hide.bs.modal', function (e) {
+                var input = $('#imageInput').val();
+                $('#'+input).val('');
+
+                var name = $('#selectedImage').val();
+
+                if(name != '')
+                    name = name.split('://painel.').join('://');
+
+                $('#'+input).val(name);
+            });
+    </script>
 @endsection

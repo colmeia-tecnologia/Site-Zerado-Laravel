@@ -41,7 +41,11 @@
         
         $('#selectedImage').val(name);
 
-        $('#uploadModal').modal('hide');
+        @if(Route::current()->uri == 'upload')
+            $('#uploadModal').modal('hide');
+        @elseif(Route::current()->uri == 'upload/tinymce')
+            $('#uploadModalTinyMce').modal('hide');
+        @endif
     });
 
     $('#deleteImage').click(function(){
