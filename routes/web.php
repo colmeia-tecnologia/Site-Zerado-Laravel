@@ -30,6 +30,10 @@ Route::group([
     Route::resource('clients', 'ClientController');
     Route::resource('videos', 'VideoController');
     Route::resource('pages', 'PageController');
+    Route::resource('product_categories', 'ProductCategoryController');
+    Route::get('product_categories/getSubcategoriesCombo/{id}', 'ProductCategoryController@getSubcategoriesCombo')->name('products.getSubcategoriesCombo');
+    Route::resource('product_subcategories', 'ProductSubcategoryController');
+    Route::resource('products', 'ProductController');
     Route::resource('users', 'UserController');
     
     //Blog
