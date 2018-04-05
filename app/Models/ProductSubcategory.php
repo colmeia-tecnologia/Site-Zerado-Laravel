@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,9 +44,9 @@ class ProductSubcategory extends Model implements Transformable
         return $this->hasOne(ProductCategory::class, 'id', 'product_category_id');
     }
 
-    /*public function products()
+    public function products()
     {
         return $this->hasMany(Product::class);
-    }*/
+    }
 
 }

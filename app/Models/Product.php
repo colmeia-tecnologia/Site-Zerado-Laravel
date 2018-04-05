@@ -2,28 +2,26 @@
 
 namespace App\Models;
 
-use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\ProductSubcategory;
-use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class ProductCategory extends Model implements Transformable
+class Product extends Model implements Transformable
 {
     use TransformableTrait;
     use SoftDeletes;
     use LogsActivity;
-    use CascadeSoftDeletes;
-
-    protected $cascadeDeletes = [
-        'subcategories',
-    ];
 
     protected $fillable = [
-        'title'
+        'name',
+        'price',
+        'quantity',
+        'product_category_id',
+        'product_subcategory_id',
     ];
     
     /*
@@ -32,7 +30,13 @@ class ProductCategory extends Model implements Transformable
      * @var array
      */
     protected static $logAttributes = [
-        'id', 'title'
+        'id', 
+        'name',
+        'price',
+        'quantity',
+        'product_category_id',
+        'product_subcategory_id',
+
     ];
 
     /**
@@ -42,14 +46,13 @@ class ProductCategory extends Model implements Transformable
      */
     protected $dates = ['created_at', 'deleted_at'];
 
-    public function subcategories()
+    public function category()
     {
-        return $this->hasMany(ProductSubcategory::class);
+        return $this->hasOne(ProductCategory::class, 'id', 'product_category_id');
     }
 
-    public function products()
+    public function subcategory()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasOne(ProductSubcategory::class, 'id', 'product_subcategory_id');
     }
-
 }

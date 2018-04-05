@@ -63,6 +63,14 @@
             </a>
         </li>
     @endcan
+    {{--PRODUCT--}}
+    @can('view-products')
+        <li>
+            <a href='{{route('products.index')}}' alt='Produtos' title='Produtos'>
+                <i class="fa fa-tags" aria-hidden="true"></i> Produtos
+            </a>
+        </li>
+    @endcan
     {{--Users--}}
     @can('view-users')
         <li>

@@ -3,20 +3,26 @@
 namespace App\Http\Controllers\Painel;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Painel\ProductCategoryRequest;
+use App\Http\Requests\Painel\ProductRequest;
 use App\Repositories\ProductCategoryRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Spatie\Activitylog\Models\Activity;
 
-class ProductCategoryController extends Controller
+class ProductController extends Controller
 {
     private $repository;
+    private $categoryRepository;
 
-    public function __construct(ProductCategoryRepository $repository)
+    public function __construct(
+                                    ProductRepository $repository,
+                                    ProductCategoryRepository $categoryRepository
+                                )
     {
         $this->repository = $repository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -26,12 +32,12 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        if(Gate::denies('view-product_categories'))
+        if(Gate::denies('view-products'))
             return redirect('/');
 
-        $productCategories = $this->repository->paginate();
+        $products = $this->repository->paginate();
 
-        return view('painel.product_categories.index', compact('productCategories'));
+        return view('painel.products.index', compact('products'));
     }
 
     /**
@@ -41,10 +47,12 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        if(Gate::denies('create-product_categories'))
+        if(Gate::denies('create-products'))
             return redirect('/');
 
-        return view('painel.product_categories.create');
+        $productCategories = $this->categoryRepository->comboboxList();
+
+        return view('painel.products.create', compact('productCategories'));
     }
 
     /**
@@ -53,22 +61,26 @@ class ProductCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductCategoryRequest $request)
+    public function store(ProductRequest $request)
     {
-        if(Gate::denies('create-product_categories'))
+        if(Gate::denies('create-products'))
             return redirect('/');
 
         $data = $request->all();
+        $data['price'] = str_replace('R$', '', $data['price']);
+        $data['price'] = str_replace(' ', '', $data['price']);
+        $data['price'] = str_replace('.', '', $data['price']);
+        $data['price'] = str_replace(',', '.', $data['price']);
 
         $this->repository->create($data);
 
         //Grava Log
         Activity::all()->last();
 
-        Session::flash('message', ['Categoria de Produto salva com sucesso!']); 
+        Session::flash('message', ['Produto salvo com sucesso!']); 
         Session::flash('alert-type', 'alert-success'); 
 
-        return redirect('/product_categories');
+        return redirect('/products');
     }
 
     /**
@@ -90,12 +102,14 @@ class ProductCategoryController extends Controller
      */
     public function edit($id)
     {
-        if(Gate::denies('update-product_categories'))
+        if(Gate::denies('update-products'))
             return redirect('/');
 
-        $productCategory = $this->repository->find($id);
+        $product = $this->repository->find($id);
 
-        return view('painel.product_categories.edit', compact('productCategory'));
+        $productCategories = $this->categoryRepository->comboboxList();
+
+        return view('painel.products.edit', compact('product', 'productCategories'));
     }
 
     /**
@@ -105,22 +119,26 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductCategoryRequest $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        if(Gate::denies('update-product_categories'))
+        if(Gate::denies('update-products'))
             return redirect('/');
 
         $data = $request->all();
+        $data['price'] = str_replace('R$', '', $data['price']);
+        $data['price'] = str_replace(' ', '', $data['price']);
+        $data['price'] = str_replace('.', '', $data['price']);
+        $data['price'] = str_replace(',', '.', $data['price']);
 
         $this->repository->update($data, $id);
 
         //Grava Log
         Activity::all()->last();
 
-        Session::flash('message', ['Categoria de Produto alterada com sucesso!']); 
+        Session::flash('message', ['Produto alterado com sucesso!']); 
         Session::flash('alert-type', 'alert-success'); 
 
-        return redirect()->route('product_categories.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -131,7 +149,7 @@ class ProductCategoryController extends Controller
      */
     public function destroy($id)
     {
-        if(Gate::denies('delete-product_categories'))
+        if(Gate::denies('delete-products'))
             return redirect('/');
 
         $this->repository->delete($id);
@@ -139,16 +157,6 @@ class ProductCategoryController extends Controller
         //Grava Log
         Activity::all()->last();
 
-        return redirect()->route('product_categories.index');
-    }
-
-    /**
-     * Get Id and Title of all subcategories of a parent category
-     * @param  int $id 
-     * @return array
-     */
-    public function getSubcategoriesCombo($id)
-    {
-        return $this->repository->subcategoriesComboboxList($id);   
+        return redirect()->route('products.index');
     }
 }
