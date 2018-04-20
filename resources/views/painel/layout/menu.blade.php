@@ -1,4 +1,4 @@
-<ul>
+<ul class="dropdown-menu inverse-dropdown" role="menu">
     {{--PÁGINAS--}}
     @can('view-pages')
         <li>
@@ -87,7 +87,7 @@
     </li>
 
     {{--BLOG--}}
-    <li class='menuLabel'>
+    <li class='menuLabel text-center'>
         Blog
     </li>
     {{--POST_CATEGORIES--}}

@@ -10,7 +10,30 @@ class UploadController extends Controller
 {
     public function index()
     {
-        $files = Storage::files('img');
+        $files = array();
+        $filesList = array();
+        $fileListDirectory = Storage::files('img');
+
+        //Cria um vetor com imagem e data
+        foreach ($fileListDirectory as $file) {
+            $f['file'] = $file; 
+            $f['date'] = filemtime($file); 
+
+            $filesList[] = $f;
+        }
+
+        //Ordena Vetor por data
+        usort($filesList, function($a, $b) {
+            return $a['date'] <=> $b['date'];
+        });
+
+        //Inverte o vetor para pegar as imagens mais recentes
+        $filesList = array_reverse($filesList);
+
+        //Obtem somente as imagens
+        foreach ($filesList as $f) {
+            $files[] = $f['file'];
+        }
 
         return view('painel.upload.index', compact('files'));
     }
