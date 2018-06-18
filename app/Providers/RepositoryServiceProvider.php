@@ -79,6 +79,10 @@ class RepositoryServiceProvider extends ServiceProvider
                 \App\Repositories\ProductRepository::class, 
                 \App\Repositories\ProductRepositoryEloquent::class
         );
+        $this->app->bind(
+                \App\Repositories\SocialMediaRepository::class, 
+                \App\Repositories\SocialMediaRepositoryEloquent::class
+        );
         //:end-bindings:
     }
 }

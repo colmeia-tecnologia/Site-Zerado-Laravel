@@ -71,6 +71,14 @@
             </a>
         </li>
     @endcan
+    {{--SOCIAL MEDIA--}}
+    @can('view-socialmedias')
+    <li>
+        <a href='{{route('socialmedias.index')}}' alt='Mídias Socials' title='Mídias Socials'>
+            <i class="fa fa-facebook-square" aria-hidden="true"></i> Mídias Socials
+        </a>
+    </li>
+    @endcan
     {{--Users--}}
     @can('view-users')
         <li>

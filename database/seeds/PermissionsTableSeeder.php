@@ -22,6 +22,7 @@ class PermissionsTableSeeder extends Seeder
                         'product_categories'    => 'categorias de produto',
                         'product_subcategories' => 'subcategorias de produto',
                         'products'              => 'produtos',
+                        'socialmedias'      => 'mídias sociais',
                         'users'                 => 'usuários',
                         'permissions'           => 'permissões',
                         //Blog
