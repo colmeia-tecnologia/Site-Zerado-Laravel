@@ -34,6 +34,7 @@ Route::group([
     Route::get('product_categories/getSubcategoriesCombo/{id}', 'ProductCategoryController@getSubcategoriesCombo')->name('products.getSubcategoriesCombo');
     Route::resource('product_subcategories', 'ProductSubcategoryController');
     Route::resource('products', 'ProductController');
+    Route::resource('socialmedias', 'SocialMediaController');
     Route::resource('users', 'UserController');
     
     //Blog
