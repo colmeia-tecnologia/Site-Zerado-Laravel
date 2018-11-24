@@ -74,8 +74,16 @@
     {{--SOCIAL MEDIA--}}
     @can('view-socialmedias')
     <li>
-        <a href='{{route('socialmedias.index')}}' alt='Mídias Socials' title='Mídias Socials'>
-            <i class="fa fa-facebook-square" aria-hidden="true"></i> Mídias Socials
+        <a href='{{route('socialmedias.index')}}' alt='Mídias Sociais' title='Mídias Sociais'>
+            <i class="fa fa-facebook-square" aria-hidden="true"></i> Mídias Sociais
+        </a>
+    </li>
+    @endcan
+    {{--EMPLOYEE--}}
+    @can('view-employees')
+    <li>
+        <a href='{{route('employees.index')}}' alt='Funcionários' title='Funcionários'>
+            <i class="fa fa-users" aria-hidden="true"></i> Funcionários
         </a>
     </li>
     @endcan

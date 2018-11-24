@@ -17,7 +17,7 @@ Auth::routes();
  * PAINEL
  */
 Route::group([
-                'domain' => 'painel.'.str_replace('http://','',env('APP_URL')),
+                //'domain' => 'painel.'.str_replace('http://','',env('APP_URL')),
                 'namespace' => 'Painel',
                 'middleware' => 'auth'
             ], function() 
@@ -35,6 +35,7 @@ Route::group([
     Route::resource('product_subcategories', 'ProductSubcategoryController');
     Route::resource('products', 'ProductController');
     Route::resource('socialmedias', 'SocialMediaController');
+    Route::resource('employees', 'EmployeeController');
     Route::resource('users', 'UserController');
     
     //Blog
@@ -59,8 +60,8 @@ Route::group([
 
 
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');*/
